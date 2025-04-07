@@ -1,0 +1,123 @@
+.results-page {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.results-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.results-container h1 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.student-info {
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #F5F5DC;
+  border-radius: 8px;
+}
+
+.student-info p {
+  margin: 5px 0;
+}
+
+.score-card {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.score h2 {
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+.score p {
+  margin-bottom: 15px;
+}
+
+.answer-review h3 {
+  margin-bottom: 20px;
+}
+
+.answer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.answer-item {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.answer-content {
+  flex: 1;
+}
+
+.answer-status {
+  font-size: 24px;
+  margin-left: 20px;
+}
+
+.correct-answer {
+  margin-top: 5px;
+  display: block;
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.button-link {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* Responzivní design pro mobilní zařízení */
+@media (max-width: 600px) {
+  .results-container {
+    padding: 20px 15px;
+  }
+  
+  .score h2 {
+    font-size: 36px;
+  }
+  
+  .answer-item {
+    flex-direction: column;
+  }
+  
+  .answer-status {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  
+  .buttons {
+    flex-direction: column;
+  }
+  
+  .button-link {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

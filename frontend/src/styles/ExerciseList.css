@@ -1,0 +1,60 @@
+.exercise-list-page {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.exercise-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.exercise-list-container h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.exercise-card {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.exercise-card h2 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.exercise-details {
+  margin-top: 15px;
+}
+
+.exercise-details p {
+  margin: 5px 0;
+}
+
+/* Responzivní design pro mobilní zařízení */
+@media (max-width: 600px) {
+  .exercises-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .exercise-card {
+    padding: 15px;
+  }
+}

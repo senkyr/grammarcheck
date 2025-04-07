@@ -1,0 +1,125 @@
+.teacher-dashboard {
+  min-height: 100vh;
+  background-color: #F5F5DC;
+}
+
+.dashboard-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: white;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dashboard-tabs {
+  display: flex;
+  padding: 0 20px;
+  border-bottom: 1px solid #D2B48C;
+  background-color: white;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 15px 20px;
+  margin-right: 5px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tab.active {
+  margin-bottom: -1px;
+}
+
+.dashboard-content {
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.exercises-list h2 {
+  margin-bottom: 20px;
+}
+
+.exercises-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.exercises-table th,
+.exercises-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #D2B48C;
+}
+
+.exercises-table th {
+  background-color: #D2B48C;
+  color: #3E2723;
+}
+
+.exercises-table tr:last-child td {
+  border-bottom: none;
+}
+
+.exercises-table tr:hover {
+  background-color: #F5F5DC;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons button {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* Responzivní design pro mobilní zařízení */
+@media (max-width: 768px) {
+  .dashboard-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .tab {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .exercises-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+}

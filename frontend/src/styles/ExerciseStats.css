@@ -1,0 +1,149 @@
+.exercise-stats {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-stats h2 {
+  margin-bottom: 30px;
+}
+
+.stats-summary {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+.stat-item {
+  text-align: center;
+  min-width: 150px;
+  margin-bottom: 15px;
+}
+
+.stat-item h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.challenge-stats {
+  margin-bottom: 40px;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stats-table th,
+.stats-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #D2B48C;
+}
+
+.stats-table th {
+  background-color: #D2B48C;
+  color: #3E2723;
+}
+
+.stats-table tr:last-child td {
+  border-bottom: none;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: #eee;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.progress-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.submissions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.submissions-table th,
+.submissions-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #D2B48C;
+}
+
+.submissions-table th {
+  background-color: #D2B48C;
+  color: #3E2723;
+}
+
+.export-section {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.export-button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responzivní design pro mobilní zařízení */
+@media (max-width: 600px) {
+  .stats-summary {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stat-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .submissions-table,
+  .stats-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .export-section {
+    text-align: center;
+  }
+}

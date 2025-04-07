@@ -1,7 +1,12 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
+// Vytvoření kontextu
 export const ThemeContext = createContext();
 
+// Hook pro snadnější použití kontextu v komponentách
+export const useTheme = () => useContext(ThemeContext);
+
+// Provider komponenta
 export const ThemeProvider = ({ children }) => {
   const [theme] = useState({
     primary: '#8B7D6B', // Sépiový tón

@@ -1,0 +1,76 @@
+.exercise-form-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-form-container h2 {
+  margin-bottom: 20px;
+}
+
+.exercise-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-description {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.exercise-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.radio-group {
+  margin-top: 10px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.exercise-form button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Responzivní design pro mobilní zařízení */
+@media (max-width: 600px) {
+  .exercise-form-container {
+    padding: 20px 15px;
+  }
+  
+  .exercise-form button {
+    width: 100%;
+    align-self: center;
+  }
+}
