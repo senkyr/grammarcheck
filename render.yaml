@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: pravopisna-cviceni
+    env: node
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false  # Tato hodnota bude zadána manuálně v Render dashboardu
+      - key: PORT
+        value: 8080

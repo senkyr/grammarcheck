@@ -86,3 +86,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+node_modules/
+.env
+.DS_Store
+/frontend/build/
+npm-debug.log*
