@@ -30,7 +30,7 @@ Webová aplikace pro procvičování českého pravopisu, určená především 
 
 ### Backend:
 - Node.js s Express
-- MongoDB pro ukládání cvičení a výsledků
+- SQLite pro ukládání cvičení a výsledků (bez nutnosti externí databáze)
 - REST API
 - Automatická analýza textu pomocí knihovny natural
 
@@ -54,11 +54,10 @@ npm install
 cd ..
 ```
 
-3. Vytvořte soubor `.env` v kořenovém adresáři a nastavte následující proměnné:
+3. Vytvořte soubor `.env` v kořenovém adresáři (volitelné):
 ```
 NODE_ENV=development
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/pravopisna-cviceni
 ```
 
 4. Spusťte aplikaci v režimu pro vývoj:
@@ -77,12 +76,17 @@ Aplikace je připravena pro nasazení na platformě Render:
 3. Nastavte následující hodnoty:
    - Build Command: `npm run build`
    - Start Command: `npm start`
-4. Přidejte environment variable MONGODB_URI s připojovacím řetězcem pro MongoDB.
+4. V sekci "Disks" přidejte perzistentní disk:
+   - Mountpath: `/opt/render/project/src/data`
+   - Size: 1 GB (minimální hodnota pro SQLite data)
+
+Výhodou SQLite implementace je, že nepotřebujete žádnou externí databázi - všechna data jsou uložena přímo v souboru v projektu. Render automaticky zajistí, že data budou perzistentní díky připojenému disku.
 
 ## Struktura projektu
 
 ```
 /
+├── data/                  # SQLite databázový soubor
 ├── frontend/              # Frontend aplikace (React)
 │   ├── public/            # Statické soubory
 │   └── src/               # Zdrojový kód
@@ -93,7 +97,7 @@ Aplikace je připravena pro nasazení na platformě Render:
 │       └── App.js         # Hlavní React komponenta
 ├── backend/               # Backend aplikace (Node.js + Express)
 │   ├── controllers/       # Kontrolery pro různé endpointy
-│   ├── models/            # Datové modely
+│   ├── models/            # Datové modely a inicializace databáze
 │   ├── routes/            # API routy
 │   └── server.js          # Hlavní soubor serveru
 └── package.json           # Projektové závislosti
@@ -109,3 +113,7 @@ Možnosti rozšíření aplikace:
 4. Export a import cvičení
 5. Gamifikační prvky pro zvýšení motivace studentů
 6. Offline režim pomocí PWA (Progressive Web App)
+
+## Licence
+
+MIT

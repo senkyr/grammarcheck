@@ -1,24 +1,31 @@
-const Submission = require('../models/Submission');
-const Exercise = require('../models/Exercise');
-const crypto = require('crypto');
-
 exports.submitExercise = async (req, res) => {
+  const db = req.db;
+  
   try {
     const { exerciseId, studentName, answers } = req.body;
     
     // Vytvoření jednoduchého session tokenu pro identifikaci studenta
     const sessionToken = crypto.randomBytes(16).toString('hex');
     
-    const exercise = await Exercise.findById(exerciseId);
+    // Načtení cvičení
+    const exercise = await db.get(
+      `SELECT id, challenges, showResultsImmediately, deadline
+       FROM exercises WHERE id = ?`,
+      [exerciseId]
+    );
+    
     if (!exercise) {
       return res.status(404).json({ message: 'Cvičení nenalezeno' });
     }
     
+    // Převod challenges na objekt
+    const challenges = JSON.parse(exercise.challenges);
+    
     // Vyhodnocení správnosti odpovědí
     let score = 0;
     const evaluatedAnswers = answers.map(answer => {
-      const challenge = exercise.challenges.find(
-        c => c._id.toString() === answer.challengeId
+      const challenge = challenges.find(
+        c => c.id.toString() === answer.challengeId
       );
       
       const isCorrect = challenge && challenge.correctOption === answer.selectedOption;
@@ -30,19 +37,32 @@ exports.submitExercise = async (req, res) => {
       };
     });
     
-    const submission = new Submission({
-      exerciseId,
-      studentName,
-      answers: evaluatedAnswers,
-      score,
-      maxScore: exercise.challenges.length,
-      sessionToken
-    });
+    // Uložení odevzdání do databáze
+    const result = await db.run(
+      `INSERT INTO submissions (exerciseId, studentName, answers, score, maxScore, sessionToken)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [
+        exerciseId,
+        studentName,
+        JSON.stringify(evaluatedAnswers),
+        score,
+        challenges.length,
+        sessionToken
+      ]
+    );
     
-    await submission.save();
+    // Načtení kompletního odevzdání
+    const submission = await db.get(
+      `SELECT id, exerciseId, studentName, answers, score, maxScore, sessionToken, submittedAt
+       FROM submissions WHERE id = ?`,
+      [result.lastID]
+    );
+    
+    // Převod answers na objekt
+    submission.answers = JSON.parse(submission.answers);
     
     // Rozhodnutí, zda vrátit výsledky okamžitě nebo ne
-    if (exercise.showResultsImmediately) {
+    if (exercise.showResultsImmediately === 1) {
       res.status(201).json({ 
         submission,
         showResults: true
@@ -60,26 +80,38 @@ exports.submitExercise = async (req, res) => {
 };
 
 exports.getSubmissionResults = async (req, res) => {
+  const db = req.db;
+  
   try {
     const { sessionToken } = req.params;
     
-    const submission = await Submission.findOne({ sessionToken })
-      .populate('exerciseId');
+    // Načtení odevzdání
+    const submission = await db.get(
+      `SELECT s.id, s.exerciseId, s.studentName, s.answers, s.score, s.maxScore, s.submittedAt,
+              e.showResultsImmediately, e.deadline
+       FROM submissions s
+       JOIN exercises e ON s.exerciseId = e.id
+       WHERE s.sessionToken = ?`,
+      [sessionToken]
+    );
     
     if (!submission) {
       return res.status(404).json({ message: 'Výsledek nenalezen' });
     }
     
+    // Převod answers na objekt
+    submission.answers = JSON.parse(submission.answers);
+    
     // Kontrola, zda už je po deadlinu nebo zda je povoleno okamžité zobrazení
-    const exercise = submission.exerciseId;
     const now = new Date();
     
-    if (exercise.showResultsImmediately || (exercise.deadline && now > exercise.deadline)) {
+    if (submission.showResultsImmediately === 1 || 
+        (submission.deadline && new Date(submission.deadline) < now)) {
       res.status(200).json(submission);
     } else {
       res.status(403).json({ 
         message: 'Výsledky ještě nejsou k dispozici',
-        availableAt: exercise.deadline
+        availableAt: submission.deadline
       });
     }
   } catch (error) {

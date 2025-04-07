@@ -9,14 +9,15 @@
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "npm install && cd frontend && npm install && npm run build",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "postinstall": "node -e \"const fs = require('fs'); const dir = './data'; if (!fs.existsSync(dir)) fs.mkdirSync(dir);\""
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^7.5.0",
-    "natural": "^6.5.0"
+    "natural": "^6.5.0",
+    "sqlite": "^5.0.1",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "concurrently": "^8.2.1",
@@ -29,15 +30,15 @@
     "type": "git",
     "url": "git+https://github.com/senkyr/grammarcheck.git"
   },
+  "bugs": {
+    "url": "https://github.com/senkyr/grammarcheck/issues"
+  },
+  "homepage": "https://github.com/senkyr/grammarcheck#readme",
   "keywords": [
     "grammar",
     "czech",
     "school"
   ],
   "author": "Jakub Šenkýř",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/senkyr/grammarcheck/issues"
-  },
-  "homepage": "https://github.com/senkyr/grammarcheck#readme"
+  "license": "MIT"
 }
